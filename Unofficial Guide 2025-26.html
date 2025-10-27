@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASC Interviews Guide 2025-26</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1a1a;
+            overflow: hidden;
+        }
+
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .slide {
+            width: 90vw;
+            height: 90vh;
+            max-width: 1200px;
+            max-height: 675px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            display: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide.active {
+            display: block;
+            animation: slideIn 0.4s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide-content {
+            padding: 60px 80px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Princeton Orange Accent Bar */
+        .accent-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #E77500 0%, #FF8C00 100%);
+        }
+
+        .accent-corner {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, transparent 50%, rgba(231, 117, 0, 0.08) 50%);
+        }
+
+        h1 {
+            font-size: 3.2em;
+            color: #000000;
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 2.2em;
+            color: #000000;
+            margin-bottom: 30px;
+            font-weight: 600;
+            border-left: 5px solid #E77500;
+            padding-left: 20px;
+        }
+
+        h3 {
+            font-size: 1.5em;
+            color: #E77500;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        p, li {
+            font-size: 1.1em;
+            line-height: 1.7;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        a {
+            color: #E77500;
+        }
+
+        .subtitle {
+            font-size: 1.4em;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #FFF5EB 0%, #FFE4CC 100%);
+            border-left: 4px solid #E77500;
+            padding: 10px 25px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .stat-box {
+            background: white;
+            border: 2px solid #E77500;
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .stat-number {
+            font-size: 3em;
+            color: #E77500;
+            font-weight: 700;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1.1em;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 20px;
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+            padding: 20px;
+            background: #f8f8f8;
+            border-radius: 8px;
+            border-top: 4px solid #E77500;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: #E77500;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: 700;
+            margin: 0 auto 15px;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            padding-left: 30px;
+            position: relative;
+            margin-bottom: 12px;
+        }
+
+        ul li:before {
+            content: "•";
+            color: #E77500;
+            font-size: 1.3em;
+            position: absolute;
+            left: 0;
+            top: -6px;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        button {
+            background: #E77500;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1em;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        button:hover {
+            background: #D06600;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(231, 117, 0, 0.3);
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .slide-counter {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            color: white;
+            font-size: 1em;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px 20px;
+            border-radius: 20px;
+            z-index: 100;
+        }
+
+        .title-slide {
+            background: linear-gradient(135deg, #000000 0%, #2a2a2a 100%);
+        }
+
+        .title-slide .slide-content {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .title-slide h1 {
+            color: white;
+            font-size: 4em;
+            margin-bottom: 30px;
+        }
+
+        .title-slide .subtitle {
+            color: #E77500;
+            font-size: 1.6em;
+        }
+
+        .title-slide .accent-bar {
+            height: 10px;
+        }
+
+        .unofficial-badge {
+            background: rgba(231, 117, 0, 0.2);
+            border: 2px solid #E77500;
+            color: #E77500;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+
+        .table-dates {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .table-dates th {
+            background: #E77500;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .table-dates td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .table-dates tr:hover {
+            background: #FFF5EB;
+        }
+
+        .contact-info {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Slide 1: Title -->
+        <div class="slide active title-slide">
+            <div class="accent-bar"></div>
+            <div class="slide-content">
+                <h1>Princeton ASC Interviews</h1>
+                <div class="unofficial-badge">An Unofficial Guide</div>
+                <p class="subtitle">Prepared for Greater Princeton Area East (318R) and<br>Maryland – Eastern Shore (211) ASC regions</p>
+                <p style="color: #999; margin-top: 40px;">2025-26 Admissions Cycle</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Disclaimer -->
+        <div class="slide">
+            <div class="accent-bar"></div>
+            <div class="slide-content">
+                <div class="accent-corner"></div>
+                <h2>An Unofficial Guide</h2>
+                <div class="highlight-box">
+                    <p style="font-size: 1.2em; margin-bottom: 0;">This presentation was prepared for alumni interviewers in the Greater Princeton Area East (318R) and Maryland – Eastern Shore (211) regions as a supplement to the ASC website and interviewer materials.</p>
+                    <br>
+                    <p><strong>The official ASC website and materials takes precedence over any conflicting information here.</strong></p>
+                </div>
+                <p style="color: #666; margin-top: 30px;">Special thanks to Ozzie Frankel &rsquo;75, who inspired this presentation with his Unofficial Guide. Any errors are solely my responsibility.</p>
+            </div>
+        </div>
+
+        <!-- Slide 3: Participation -->
+        <div class="slide">
+            <div class="accent-bar"></div>
+            <div class="slide-content">
+                <div class="accent-corner"></div>
+                <h2 style="color: #E77500;">Are you excited about the Class of 2030?</h2>
+                <div class="two-column">
+                    <div>
+                        <div class="stat-box">
+                            <span class="stat-number">7,200+</span>
+                            <span class="stat-label">Alumni volunteers worldwide</span>
+                        </div>
+                        <p>ASC is one of the most popular ways for alumni/ae to remain involved with Princeton.</p>
+                    </div>
+                    <div>
+                        <div class="stat-box">
+                            <span class="stat-number">30,000+</span>
+                            <span class="stat-label">Applications received</span>
+                        </div>
+                        <p>Princeton aspires to offer an interview with an alum to every applicant.</p>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 30px;">
+                    <h3 style="color: #000;">We Need You!</h3>
+                    <p style="margin-bottom: 0;">Your assistance is greatly appreciated. In the 318R and 211 regions, we have a large number of candidates (particularly in 318R) and few volunteer interviewers (particularly in 211).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Process Overview -->
+        <div class="slide">
+            <div class="accent-bar"></div>
+            <div class="slide-content">
+                <div class="accent-corner"></div>
+                <h2>Easy and fun opportunity to represent Princeton</h2>
+                <div class="process-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3 style="font-size: 1.2em;">Sign Agreement</h3>
+                        <p style="font-size: 0.95em;">Confirm interviewer eligibility, and watch ASC video if you did not interview last year</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3 style="font-size: 1.2em;">Acknowledge Matches</h3>
+                        <p style="font-size: 0.95em;">Accept interview assignment and contact candidate within 48 hours after accepting </p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3 style="font-size: 1.2em;">Meet Applicant</h3>
+                        <p style="font-size: 0.95em;">30-45 minute virtual or in-person interviews</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h3 style="font-size: 1.2em;">Write Report</h3>
+                        <p style="font-size: 0.95em;">Submit applicant report within one week</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Eligibility -->
+        <div class="slide">
+            <div class="accent-bar"></div>
+            <div class="slide-content">
+                <div class="accent-corner"></div>
+                <h2>Interviewer Eligibility</h2>
+                <p style="font-size: 1.3em; margin-bottom: 30px;">To participate as an ASC interviewer, you must confirm:</p>
+                <ul style="font-size: 1.2em;">
+                    <li>You don't work in the college admission process</li>
+                    <li>Your child isn't applying this year</li>
+                    <li>You don't interview undergrads for another school</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 6: Getting Started -->
+        <div class="slide">
+            <div class="accent-bar"></div>
+            <div class="slide-content">
+                <div class="accent-corner"></div>
+                <h2>Getting Started</h2>
+                <p style="font-size: 1.3em; margin-bottom: 30px;">You should:</p>
+                <ul style="font-size: 1.2em;">
+                    <li>Visit the ASC website using your TigerNet log-in credentials</li>
+                    <li>Complete the questions</li>
+                    <li>ASC Video: If you interviewed for ASC last year, you <strong>do not</strong> need to watch the video again. New interviews must watch the video and enter a code displayed at the end of the video to confirm this.</li>
+                    <li>Questions: Respond using <strong>numbers only</strong></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 7: Matching Methods -->
+        <div class="slide">
+            <div class="accent-bar"></div>
+            <div class="slide-content">
+                <div class="accent-corner"></div>
+                <h2>Two Ways to Get Matched</h2>
+                <div class="two-column">
+                    <div style="background: #FFF5EB; padding: 25px; border-radius: 8px; border-top: 4px solid #E77500;">
+                        <h3 style="color: #000;">&ldquo;Grab and Go&rdquo;</h3>
+                        <ul>
+                            <li>Select time slots that work for you</li>
+                            <li>Applicants indicate availability</li>
+                            <li>Match is made official</li>
+                            <li>Confirm preselected time with applicant</li>
+                        </ul>
+                        <p style="color: #E77500; font-weight: 600; margin-top: 20px;">Jump right in! No email ping-pong.</p>
+                    </div>
+                    <div style="background: #f8f8f8; padding: 25px; border-radius: 8px; border-top: 4px solid #666;">
+                        <h3 style="color: #000;">Traditional</h3>
+                        <ul>
+                            <li>Accept assigned matches</li>
+                            <li>Arrange time directly with candidate</li>
+                            <li>Schedule at mutual convenience</li>
+                            <li>Flexible scheduling</li>
+                        </ul>
+                        <p style="color: #666; font-weight: 600; margin-top: 20px;">Maximum flexibility for both parties.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: After Matching -->
+        <div class="slide">
+            <div class="accent-bar"></div>
+            <div class="slide-content">
+                <div class="accent-corner"></div>
+                <h2>After You Have Been Matched</h2>
+                <div class="highlight-box">
+                    <h3 style="margin-top: 0;">Accept the Interview</h3>
+                    <p>Applicant's name will appear in &ldquo;Interviews Assigned to You&rdquo;. Accept the interview by clicking the check box next to &ldquo;Accept – Interview Not Yet Completed&rdquo; and then &ldquo;Report Responses&rdquo; to submit</p>
+                </div>
+                <div class="highlight-box">
+                    <h3 style="margin-top: 0;">Reach Out</h3>
+                    <p>Once you receive an assignment, please contact the student within 48 hours. Candidates receive an email when you accept the interview and tend to get nervous if they don't hear from you.</p>
+                </div>
+                <div class="highlight-box">
+                    <h3 style="margin-top: 0;">No Reply?</h3>
+                    <p>If the student does not respond to your email, click on the applicant's name to see mobile and home telephone numbers to call. Our usual rule is two emails and one phone call (or text message) before marking an applicant as non-responsive.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Meeting Applicants -->
+        <div class="slide">
+            <div class="accent-bar"></div>
+            <div class="slide-content">
+                <div class="accent-corner"></div>
+                <h2>Meeting the Applicant</h2>
+                <div class="two-column">
+                    <div>
+                        <h3>Ambassadors</h3>
+                        <p>Our role as ASC interviewers is to serve as ambassador for Princeton.</p>
+                        <p>Every applicant should be treated with respect and leave with a good impression of Princeton and the process.</p>
+                    </div>
+                    <div>
+                        <h3>Informal</h3>
+                        <p>Applicants must have the option for a virtual interview. If you are not able to honor the applicant's preference for a virtual interview, we can find a different match.</p>
+                        <p>Conversations should be informal and last around 30-45 minutes.</p>
+                        <p>The interview is not about their grades, their likelihood of admission or a test of their knowledge.</p>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 30px;">
+                    <p style="font-size: 1.2em; margin-bottom: 0; text-align: center;"><strong>Princeton's low acceptance rate means many applicants will not be admitted; however, every applicant deserves a positive experience.</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Report Timing -->
+        <div class="slide">
+            <div class="accent-bar"></div>
+            <div class="slide-content">
+                <div class="accent-corner"></div>
+                <h2>Communications</h2>
+                <div class="highlight-box">
+                    <h3 style="margin-top: 0;">Your candidate report is most useful when:</h3>
+                    <ul>
+                        <li><strong>It is substantive</strong> with specific examples and observations</li>
+                        <li><strong>It arrives well in advance</strong> of the report deadline. The Admission Office benefits from more time to consider your report.</li>
+                    </ul>
+                </div>
+                <div style="background: #E77500; color: white; padding: 30px; border-radius: 8px; margin-top: 30px; text-align: center;">
+                    <p style="font-size: 1.4em; color: white; margin-bottom: 0;"><strong>Complete your report within one week of conducting the interview, while impressions are still vivid.</strong></p>
+                </div>
+                <p style="margin-top: 25px; font-size: 1.15em;"></p>
+            </div>
+        </div>
+
+        <!-- Slide 11: Report Content -->
+        <div class="slide">
+            <div class="accent-bar"></div>
+            <div class="slide-content">
+                <div class="accent-corner"></div>
+                <h2>Areas to Discuss in Your Report</h2>
+                <ul>
+                    <li>Your impression of the candidate's <strong>personal qualities</strong>, with supporting examples when possible</li>
+                    <li>Is this someone you could imagine <strong>interacting positively and contributing</strong> in campus activities?</li>
+                    <li><strong>Unusual circumstances</strong> about the applicant's background, local area, experiences, or accomplishments</li>
+                    <li>Were there particular <strong>limitations or special opportunities</strong> that impacted this student's experiences?</li>
+                    <li>Your sense of the student's <strong>intellectual curiosity</strong></li>
+                    <li>Can they effectively discuss a <strong>favorite academic area</strong>?</li>
+                    <li>Can they describe in detail a <strong>project or paper</strong> that was particularly interesting to them?</li>
+                    <li>Is there a <strong>book, film or work of art</strong> that has been meaningful to them?</li>
+                    <li>If you and the candidate <strong>did not hit it off</strong>, tell us that and explain why</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 12: Important Dates -->
+        <div class="slide">
+            <div class="accent-bar"></div>
+            <div class="slide-content">
+                <div class="accent-corner"></div>
+                <h2>Dates to Remember</h2>
+                <table class="table-dates">
+                    <tr>
+                        <th>Date</th>
+                        <th>Event</th>
+                    </tr>
+                    <tr>
+                        <td><strong>November 1</strong></td>
+                        <td>Early Action deadline for applications. Interview assignments will begin</td>
+                    </tr>
+                    <tr>
+                        <td><strong>November 30</strong></td>
+                        <td>Last date to submit interview reports for Early Action candidates</td>
+                    </tr>
+                    <tr>
+                        <td><strong>mid-December</strong></td>
+                        <td>Early Action candidates will learn admission decisions</td>
+                    </tr>
+                    <tr>
+                        <td><strong>January 1</strong></td>
+                        <td>Regular Decision (RD) deadline for applications. Interview assignments for RD cycle will start</td>
+                    </tr>
+                    <tr>
+                        <td><strong>February 26</strong></td>
+                        <td>Last date to submit interview reports for RD candidates</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Early April</strong></td>
+                        <td>Regular Decision candidates will learn admission decisions</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Slide 13: Thank You -->
+        <div class="slide title-slide">
+            <div class="accent-bar"></div>
+            <div class="slide-content">
+                <h1 style="font-size: 3em;">Thank You!</h1>
+                <p style="color: white; font-size: 1.3em; margin: 30px 0;">On behalf of the University, the Office of Admission and the ASC, thank you very much for participating in alumni/ae interviews to meet great applicants who will join the incoming Class of 2030!</p>
+                <div class="contact-info">
+                    <strong>Mark Badros &rsquo;92</strong>
+                    <div><a href="mailto:mbadros@gmail.com">mbadros@gmail.com</a></div>
+                    <div><a href="tel:+19175122761">(917) 512-2761</a> (text or call)</div>
+                </div>
+                <p style="color: #999; margin-top: 40px; font-size: 1.1em;">The <a href="https://admissionapp.princeton.edu/asc-interview/index.xhtml">ASC website</a> has additional important and useful information, including email templates for contacting applicants, guidance on conducting interviews and examples of good candidate reports</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-counter">
+        <span id="current-slide">1</span> / <span id="total-slides">13</span>
+    </div>
+
+    <div class="navigation">
+        <button id="prev-btn" onclick="prevSlide()">← Previous</button>
+        <button id="next-btn" onclick="nextSlide()">Next →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        document.getElementById('total-slides').textContent = totalSlides;
+        
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+            document.getElementById('prev-btn').disabled = currentSlide === 0;
+            document.getElementById('next-btn').disabled = currentSlide === totalSlides - 1;
+        }
+        
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                showSlide(currentSlide + 1);
+            }
+        }
+        
+        function prevSlide() {
+            if (currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+        
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html>
