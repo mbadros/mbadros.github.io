@@ -190,6 +190,80 @@
             margin: 0 auto 15px;
         }
 
+        .login-container {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            width: 90%;
+            max-width: 450px;
+            border-top: 6px solid #E77500;
+        }
+
+        .login-container h2 {
+            margin-top: 0;
+            color: #000;
+            text-align: center;
+            font-size: 1.8em;
+            border: none;
+            padding: 0;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        input[type="password"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="password"]:focus {
+            outline: none;
+            border-color: #E77500;
+        }
+        
+        .login-container button {
+            width: 100%;
+            padding: 0.75rem;
+            background: #E77500;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-weight: 600;
+        }
+        
+        .login-container button:hover {
+            background: #D06600;
+        }
+        
+        .error {
+            color: #e74c3c;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .error.show {
+            display: block;
+        }
+                
         ul {
             list-style: none;
             padding-left: 0;
@@ -214,12 +288,16 @@
             position: fixed;
             bottom: 30px;
             right: 30px;
-            display: flex;
+            display: none;
             gap: 15px;
             z-index: 100;
         }
 
-        button {
+        .navigation.visible {
+            display: flex;
+        }
+
+        .navigation button {
             background: #E77500;
             color: white;
             border: none;
@@ -231,16 +309,17 @@
             font-weight: 600;
         }
 
-        button:hover {
+        .navigation button:hover:not(:disabled) {
             background: #D06600;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(231, 117, 0, 0.3);
         }
 
-        button:disabled {
+        .navigation button:disabled {
             background: #ccc;
             cursor: not-allowed;
             transform: none;
+            opacity: 0.5;
         }
 
         .slide-counter {
@@ -253,6 +332,10 @@
             padding: 10px 20px;
             border-radius: 20px;
             z-index: 100;
+        }
+
+        .slide-counter.visible {
+            display: block;
         }
 
         .title-slide {
@@ -317,10 +400,44 @@
         .contact-info {
             color: white;
         }
+
+        /* Login overlay */
+        .login-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .login-overlay.hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
+
     <div class="presentation-container">
+        <!-- Login Overlay -->
+        <div class="login-overlay" id="loginOverlay">
+            <div class="login-container">
+                <h2>🔒 For ASC Interviewers</h2>
+                <form onsubmit="checkPassword(event)">
+                    <div class="form-group">
+                        <label for="password">Enter Password:</label>
+                        <input type="password" id="password" placeholder="Enter password" required autofocus>
+                        <div class="error" id="error">Incorrect password. Please try again.</div>
+                    </div>
+                    <button type="submit">Access Content</button>
+                </form>
+            </div>
+        </div>
+
         <!-- Slide 1: Title -->
         <div class="slide active title-slide">
             <div class="accent-bar"></div>
@@ -415,9 +532,9 @@
                 <h2>Interviewer Eligibility</h2>
                 <p style="font-size: 1.3em; margin-bottom: 30px;">To participate as an ASC interviewer, you must confirm:</p>
                 <ul style="font-size: 1.2em;">
-                    <li>You don't work in the college admission process</li>
-                    <li>Your child isn't applying this year</li>
-                    <li>You don't interview undergrads for another school</li>
+                    <li>You don&rsquo;t work in the college admission process</li>
+                    <li>Your child isn&rsquo;t applying this year</li>
+                    <li>You don&rsquo;t interview undergrads for another school</li>
                 </ul>
             </div>
         </div>
@@ -430,10 +547,10 @@
                 <h2>Getting Started</h2>
                 <p style="font-size: 1.3em; margin-bottom: 30px;">You should:</p>
                 <ul style="font-size: 1.2em;">
-                    <li>Visit the ASC website using your TigerNet log-in credentials</li>
-                    <li>Complete the questions</li>
+                    <li>Visit the <a href="https://admissionapp.princeton.edu/asc-interview/index.xhtml">ASC website</a> using your TigerNet log-in credentials</li>
+                    <li>Complete the questions, including your initials where requested and responses consisting of <strong>numbers only</strong> in the section labeled &ldquo;Updating Your Account.&rdquo;</li>
                     <li>ASC Video: If you interviewed for ASC last year, you <strong>do not</strong> need to watch the video again. New interviews must watch the video and enter a code displayed at the end of the video to confirm this.</li>
-                    <li>Questions: Respond using <strong>numbers only</strong></li>
+                    <li>You have to complete these steps, including the Interviewer Agreement, before you access the contact information for any assigned candidate.</li>
                 </ul>
             </div>
         </div>
@@ -477,15 +594,15 @@
                 <h2>After You Have Been Matched</h2>
                 <div class="highlight-box">
                     <h3 style="margin-top: 0;">Accept the Interview</h3>
-                    <p>Applicant's name will appear in &ldquo;Interviews Assigned to You&rdquo;. Accept the interview by clicking the check box next to &ldquo;Accept – Interview Not Yet Completed&rdquo; and then &ldquo;Report Responses&rdquo; to submit</p>
+                    <p>Applicant&rsquo;s name will appear in &ldquo;Interviews Assigned to You.&rdquo; Accept the interview by clicking the check box next to &ldquo;Accept – Interview Not Yet Completed&rdquo; and then &ldquo;Report Responses&rdquo; to submit.</p>
                 </div>
                 <div class="highlight-box">
                     <h3 style="margin-top: 0;">Reach Out</h3>
-                    <p>Once you receive an assignment, please contact the student within 48 hours. Candidates receive an email when you accept the interview and tend to get nervous if they don't hear from you.</p>
+                    <p>Once you receive an assignment, please contact the student within 48 hours. Candidates receive an email when you accept the interview and tend to get nervous if they don&rsquo;t hear from you.</p>
                 </div>
                 <div class="highlight-box">
                     <h3 style="margin-top: 0;">No Reply?</h3>
-                    <p>If the student does not respond to your email, click on the applicant's name to see mobile and home telephone numbers to call. Our usual rule is two emails and one phone call (or text message) before marking an applicant as non-responsive.</p>
+                    <p>If the student does not respond to your email, click on the applicant&rsquo;s name to see mobile and home telephone numbers to call. Our usual rule is two emails and one phone call (or text message) before marking an applicant as non-responsive.</p>
                 </div>
             </div>
         </div>
@@ -504,13 +621,13 @@
                     </div>
                     <div>
                         <h3>Informal</h3>
-                        <p>Applicants must have the option for a virtual interview. If you are not able to honor the applicant's preference for a virtual interview, we can find a different match.</p>
+                        <p>Applicants must have the option for a virtual interview. If you are not able to honor the applicant&rsquo;s preference for a virtual interview, we can find a different match.</p>
                         <p>Conversations should be informal and last around 30-45 minutes.</p>
                         <p>The interview is not about their grades, their likelihood of admission or a test of their knowledge.</p>
                     </div>
                 </div>
                 <div class="highlight-box" style="margin-top: 30px;">
-                    <p style="font-size: 1.2em; margin-bottom: 0; text-align: center;"><strong>Princeton's low acceptance rate means many applicants will not be admitted; however, every applicant deserves a positive experience.</strong></p>
+                    <p style="font-size: 1.2em; margin-bottom: 0; text-align: center;"><strong>Princeton&rsquo;s low acceptance rate means many applicants will not be admitted; however, every applicant deserves a positive experience.</strong></p>
                 </div>
             </div>
         </div>
@@ -542,14 +659,14 @@
                 <div class="accent-corner"></div>
                 <h2>Areas to Discuss in Your Report</h2>
                 <ul>
-                    <li>Your impression of the candidate's <strong>personal qualities</strong>, with supporting examples when possible</li>
+                    <li>Your impression of the candidate&rsquo;s <strong>personal qualities</strong>, with supporting examples when possible</li>
                     <li>Is this someone you could imagine <strong>interacting positively and contributing</strong> in campus activities?</li>
-                    <li><strong>Unusual circumstances</strong> about the applicant's background, local area, experiences, or accomplishments</li>
-                    <li>Were there particular <strong>limitations or special opportunities</strong> that impacted this student's experiences?</li>
-                    <li>Your sense of the student's <strong>intellectual curiosity</strong></li>
-                    <li>Can they effectively discuss a <strong>favorite academic area</strong>?</li>
-                    <li>Can they describe in detail a <strong>project or paper</strong> that was particularly interesting to them?</li>
-                    <li>Is there a <strong>book, film or work of art</strong> that has been meaningful to them?</li>
+                    <li><strong>Unusual circumstances</strong> about the applicant&rsquo;s background, local area, experiences, or accomplishments</li>
+                    <li>Were there particular <strong>limitations or special opportunities</strong> that impacted this student&rsquo;s experiences?</li>
+                    <li>Your sense of the student&rsquo;s <strong>intellectual curiosity</strong></li>
+                    <li>Can the candidate effectively discuss a <strong>favorite academic area</strong>?</li>
+                    <li>Can the candidate describe in detail a <strong>project or paper</strong> that was particularly interesting?</li>
+                    <li>Is there a <strong>book, film or work of art</strong> that has been meaningful?</li>
                     <li>If you and the candidate <strong>did not hit it off</strong>, tell us that and explain why</li>
                 </ul>
             </div>
@@ -610,46 +727,102 @@
         </div>
     </div>
 
-    <div class="slide-counter">
+    <div class="slide-counter" id="slideCounter">
         <span id="current-slide">1</span> / <span id="total-slides">13</span>
     </div>
 
-    <div class="navigation">
-        <button id="prev-btn" onclick="prevSlide()">← Previous</button>
-        <button id="next-btn" onclick="nextSlide()">Next →</button>
+    <div class="navigation" id="navigation">
+        <button id="prev-btn" onclick="prevSlide()" disabled>← Previous</button>
+        <button id="next-btn" onclick="nextSlide()" disabled>Next →</button>
     </div>
 
     <script>
+        // Helper function to decode HTML entities
+        function decodeHTML(html) {
+            const txt = document.createElement('textarea');
+            txt.innerHTML = html;
+            return txt.value;
+        }
+
+        const correctPassword = decodeHTML("&#x54;&#x69;&#x67;&#x65;&#x72;&#x31;&#x37;&#x34;&#x36;");
+        let isUnlocked = false;
+        
+        function checkPassword(event) {
+            event.preventDefault();
+            
+            const passwordInput = document.getElementById('password');
+            const errorMsg = document.getElementById('error');
+            const loginOverlay = document.getElementById('loginOverlay');
+            const navigation = document.getElementById('navigation');
+            const slideCounter = document.getElementById('slideCounter');
+            
+            if (passwordInput.value === correctPassword) {
+                isUnlocked = true;
+                loginOverlay.classList.add('hidden');
+                navigation.classList.add('visible');
+                slideCounter.classList.add('visible');
+                errorMsg.classList.remove('show');
+                
+                // Enable navigation buttons explicitly
+                const nextBtn = document.getElementById('next-btn');
+                const prevBtn = document.getElementById('prev-btn');
+                nextBtn.removeAttribute('disabled');
+                prevBtn.setAttribute('disabled', 'true'); // Stay disabled on first slide
+            } else {
+                errorMsg.classList.add('show');
+                passwordInput.value = '';
+                passwordInput.focus();
+            }
+        }
+
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
         
         document.getElementById('total-slides').textContent = totalSlides;
+        function decodeHtml(html) {
+            return $('<div>').html(html).text();
+        }
+
+        
+        function updateNavigationButtons() {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            
+            if (!isUnlocked) {
+                prevBtn.disabled = true;
+                nextBtn.disabled = true;
+            } else {
+                prevBtn.disabled = currentSlide === 0;
+                nextBtn.disabled = currentSlide === totalSlides - 1;
+            }
+        }
         
         function showSlide(n) {
+            if (!isUnlocked) return;
+            
             slides[currentSlide].classList.remove('active');
             currentSlide = (n + totalSlides) % totalSlides;
             slides[currentSlide].classList.add('active');
             
             document.getElementById('current-slide').textContent = currentSlide + 1;
-            document.getElementById('prev-btn').disabled = currentSlide === 0;
-            document.getElementById('next-btn').disabled = currentSlide === totalSlides - 1;
+            updateNavigationButtons();
         }
         
         function nextSlide() {
-            if (currentSlide < totalSlides - 1) {
-                showSlide(currentSlide + 1);
-            }
+            if (!isUnlocked || currentSlide >= totalSlides - 1) return;
+            showSlide(currentSlide + 1);
         }
         
         function prevSlide() {
-            if (currentSlide > 0) {
-                showSlide(currentSlide - 1);
-            }
+            if (!isUnlocked || currentSlide <= 0) return;
+            showSlide(currentSlide - 1);
         }
         
         // Keyboard navigation
         document.addEventListener('keydown', (e) => {
+            if (!isUnlocked) return;
+            
             if (e.key === 'ArrowRight' || e.key === ' ') {
                 e.preventDefault();
                 nextSlide();
@@ -660,7 +833,7 @@
         });
         
         // Initialize
-        showSlide(0);
+        updateNavigationButtons();
     </script>
 </body>
 </html>
